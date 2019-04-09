@@ -107,6 +107,9 @@ int main(int argc, char *argv[]) {
   float time = static_cast<float>(num_samples) / sample_rate;
   int cur = 0;
   printf("%s %f", wav_file.c_str(), time);
+  int pos_wav_e = wav_file.find_last_of('.');
+  int pos_wav_s = wav_file.find_last_of('/');
+  std::string wavname = wav_file.substr(pos_wav_s + 1,pos_wav_e - pos_wav_s-1);
   int count = 0;
   while (cur < results.size()) {
     // silence go ahead
@@ -126,7 +129,7 @@ int main(int argc, char *argv[]) {
                                   wave.begin() + end * 160);
       WavWriter writer(sub_wave.data(), sub_wave.size(), 1, 16000, 16);
       char filename[1024] = {0};
-      sprintf(filename, "%s/%d.wav", dir.c_str(), count);
+      sprintf(filename, "%s/%s_%03d.wav", dir.c_str(),wavname.c_str(), count);
       writer.Write(filename);
     }
     count++;

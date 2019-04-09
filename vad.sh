@@ -14,5 +14,5 @@ fi
     --num-frames-lookback=10 \
     --min-length=50 \
     --max-length=10240 \
-    models/vad.net models/vad.cmvn $1
+    models/vad.quantize.net models/vad.cmvn $1
 

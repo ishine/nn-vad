@@ -19,20 +19,16 @@
 #include "../test/parse-option.h"
 
 int main(int argc, char *argv[]) {
-  const char *usage = "Convert float net to quantize net\n";
+  const char *usage = "Show net info\n";
   ParseOptions option(usage);
   option.Read(argc, argv);
-  if (option.NumArgs() != 2) {
+  if (option.NumArgs() != 1) {
     option.PrintUsage();
     exit(1);
   }
-  std::string float_net_file = option.GetArg(1),
-              quantize_net_file = option.GetArg(2);
-
-  Net net(float_net_file), quantize_net;
-  net.Quantize(&quantize_net);
-  quantize_net.Write(quantize_net_file);
-  quantize_net.Info();
+  std::string net_file = option.GetArg(1);
+  Net net(net_file);
+  net.Info();
 
   return 0;
 }
